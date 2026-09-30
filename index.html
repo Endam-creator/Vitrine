@@ -16,7 +16,7 @@
 <meta property="og:image" content="https://endam-digital.com/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Endam Digital : PronoFoot, Les Vérités Cachées, Le Grimoire de Minuit, Honeygain">
+<meta property="og:image:alt" content="Endam Digital : PronoFoot, Les Vérités Cachées, Le Grimoire de Minuit">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Endam Digital — projets web, jeux et expériences">
 <meta name="twitter:description" content="Un labo de projets web : pronos foot, satire, grimoire, et deux jeux en préparation.">
@@ -114,7 +114,15 @@ h2{font-family:"Space Grotesk",sans-serif;font-size:clamp(24px,3.2vw,32px);lette
 .tag{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);display:block;margin-bottom:6px}
 
 /* cartes projets */
-.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.grid .go .url{display:none}
+.aside-link{margin-top:22px;font-size:14.5px;color:var(--muted);text-align:center}
+.aside-link a{color:var(--text);border-bottom:1px solid color-mix(in srgb,#ffb020 50%,transparent);padding-bottom:1px}
+.aside-link a:hover{border-bottom-color:#ffb020}
+.aside-link a:hover .arrow{transform:translateX(4px)}
+.aside-link .arrow{display:inline-block;transition:transform .25s}
+.aside-link .dim{color:var(--dim);font-size:13px}
+@media (max-width:980px){.grid{grid-template-columns:1fr 1fr}.grid .card:last-child{grid-column:1/-1}}
 .card{--a:var(--cyan);--a2:var(--violet);
   position:relative;display:flex;flex-direction:column;min-height:300px;padding:28px;border-radius:var(--r);
   background:var(--card);border:1px solid var(--line);overflow:hidden;
@@ -147,7 +155,6 @@ h2{font-family:"Space Grotesk",sans-serif;font-size:clamp(24px,3.2vw,32px);lette
 .c-prono{--a:#f5c23f;--a2:#2e7dff}
 .c-verites{--a:#ff4d5e}
 .c-grimoire{--a:#b48cff}
-.c-honey{--a:#ffb020}
 
 /* teasing */
 .teasers{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
@@ -203,7 +210,9 @@ footer a:hover{color:var(--text)}
 .tile .more{margin-top:auto;padding-top:16px;font-size:14px;font-weight:600}
 .tile:hover .arrow{transform:translateX(5px)}
 .t-art{--a:#ff4d5e;padding:0}
-.t-art .thumb{aspect-ratio:16/7;background:#1a1f2b center/cover no-repeat;border-bottom:1px solid var(--line)}
+.t-art .thumb{position:relative;aspect-ratio:16/7;background:#1a1f2b center/cover no-repeat;border-bottom:1px solid var(--line)}
+.parody{position:absolute;left:14px;top:14px;font:700 11px/1 Inter,system-ui,sans-serif;letter-spacing:.14em;text-transform:uppercase;
+  color:#fff;background:#ff4d5e;padding:6px 10px;border-radius:6px;box-shadow:0 4px 14px rgba(0,0,0,.4);transform:rotate(-3deg)}
 .t-art .body{padding:20px 24px 24px;display:flex;flex-direction:column;flex:1}
 .t-sab,.t-moon{--a:#b48cff}
 .big{font-family:"Space Grotesk",sans-serif;font-size:34px;font-weight:700;line-height:1.1}
@@ -235,7 +244,9 @@ a:focus-visible{outline:2px solid var(--cyan);outline-offset:3px;border-radius:6
   .go .url{display:none}
   nav ul li:nth-child(3){display:none}
   .card,.tease{padding:22px}
-  .stats{gap:26px}
+  .stats{gap:14px 20px;flex-wrap:nowrap}
+  .stats div{font-size:26px;flex:1;text-align:center}
+  .stats small{font-size:10px;letter-spacing:.06em}
   .tease .ghost{font-size:140px}
 }
 </style>
@@ -266,9 +277,9 @@ a:focus-visible{outline:2px solid var(--cyan);outline-offset:3px;border-radius:6
   <h1>Des idées qui deviennent <em>des sites, des bots et des jeux.</em></h1>
   <p class="lead">Endam Digital, c'est mon atelier numérique : des projets web qui me passionnent, du pronostic foot au grimoire de minuit.</p>
   <div class="stats">
-    <div>4<small>projets en ligne</small></div>
-    <div>2<small>en préparation</small></div>
-    <div>100 %<small>indépendant</small></div>
+    <div><span id="st-sorts">57</span><small>sorts au grimoire</small></div>
+    <div><span id="st-enquetes">13</span><small>enquêtes parodiques</small></div>
+    <div>2<small>compétitions suivies</small></div>
   </div>
 </header>
 
@@ -285,7 +296,7 @@ a:focus-visible{outline:2px solid var(--cyan);outline-offset:3px;border-radius:6
       <h3>PronoFoot L1 &amp; LDC</h3>
       <div class="kind">Bot Discord · Pronostics</div>
       <p>Le bot de pronostics Ligue 1 et Ligue des Champions : tu pronostiques, tu marques des points, tu défies tes potes en duel et tu grimpes au classement.</p>
-      <div class="chips"><span>Ligue 1</span><span>Ligue des Champions</span><span>Duels</span><span>Classement VIP</span></div>
+      <div class="chips"><span>Ligue 1</span><span>Ligue des Champions</span><span>Duels</span><span>100 % gratuit</span></div>
       <div class="go"><b>Rejoindre le club <span class="arrow">→</span></b><span class="url">pronofoot.endam-digital.com</span></div>
     </a>
 
@@ -302,21 +313,13 @@ a:focus-visible{outline:2px solid var(--cyan);outline-offset:3px;border-radius:6
       <div class="top"><div class="icon">🌙</div><span class="status">En ligne</span></div>
       <h3>Le Grimoire de Minuit</h3>
       <div class="kind">Encyclopédie · Culture</div>
-      <p>Un Livre des Ombres à feuilleter : 57 sorts, 10 rituels, les 8 sabbats, la lune du jour, le tarot et quatre mille ans d'histoire des sorcières.</p>
-      <div class="chips"><span>57 sorts</span><span>Lune du jour</span><span>Générateur de sigils</span><span>Lettre du samedi</span></div>
+      <p>Un Livre des Ombres à feuilleter : des dizaines de sorts et de rituels, les 8 sabbats, la lune du jour, le tarot et quatre mille ans d'histoire des sorcières.</p>
+      <div class="chips"><span>Sorts et rituels</span><span>Lune du jour</span><span>Générateur de sigils</span><span>Lettre du samedi</span></div>
       <div class="go"><b>Ouvrir le grimoire <span class="arrow">→</span></b><span class="url">grimoire.endam-digital.com</span></div>
     </a>
 
-    <a class="card c-honey reveal" data-goatcounter-click="clic-honeygain" href="https://honeygain.endam-digital.com" rel="sponsored">
-      <div class="top"><div class="icon">🍯</div><span class="status">En ligne</span></div>
-      <h3>Honeygain, mon avis</h3>
-      <div class="kind">Guide · Revenu passif</div>
-      <p>Mon retour d'expérience honnête sur Honeygain, l'appli qui rémunère ta bande passante inutilisée : comment ça marche, ce que ça rapporte vraiment, et si c'est sûr.</p>
-      <div class="chips"><span>Avis honnête</span><span>Guide pas à pas</span><span>FAQ</span></div>
-      <div class="note">Contient un lien de parrainage.</div>
-      <div class="go"><b>Lire le guide <span class="arrow">→</span></b><span class="url">honeygain.endam-digital.com</span></div>
-    </a>
   </div>
+  <p class="aside-link reveal">Aussi sur Endam Digital : <a href="https://honeygain.endam-digital.com" rel="sponsored" data-goatcounter-click="clic-honeygain">mon avis honnête sur Honeygain, l'appli qui rémunère ta bande passante <span class="arrow">→</span></a> <span class="dim">(lien de parrainage)</span></p>
 </section>
 
 <section id="nouveautes" class="wrap">
@@ -327,9 +330,9 @@ a:focus-visible{outline:2px solid var(--cyan);outline-offset:3px;border-radius:6
 
   <div class="news">
     <a class="tile t-art reveal" id="n-art" data-goatcounter-click="neuf-article" href="https://les-verites-cachees.endam-digital.com/">
-      <div class="thumb" id="n-art-img"></div>
+      <div class="thumb" id="n-art-img"><span class="parody">Parodie</span></div>
       <div class="body">
-        <span class="src">Vérités Cachées · Dernier article</span>
+        <span class="src">Vérités Cachées · Dernière parodie</span>
         <h3 id="n-art-title">Les dernières révélations qu'ils ne veulent pas que tu lises</h3>
         <div class="when" id="n-art-date">Nouvel article régulièrement</div>
         <div class="more">Lire l'article <span class="arrow">→</span></div>
@@ -395,11 +398,11 @@ a:focus-visible{outline:2px solid var(--cyan);outline-offset:3px;border-radius:6
     <div>
       <span class="tag">À propos</span>
       <h2>L'esprit Endam Digital</h2>
-      <p>Endam Digital est un atelier numérique indépendant. Chaque projet part d'une envie simple : construire quelque chose d'utile, de drôle ou d'intrigant, le mettre en ligne vite, puis l'améliorer au fil des retours. Pas de levée de fonds, pas de jargon : des idées testées pour de vrai.</p>
+      <p>Endam Digital est un atelier numérique indépendant. Chaque projet part d'une envie simple : construire quelque chose d'utile, de drôle ou d'intrigant, le mettre en ligne vite, puis l'améliorer au fil des retours. Des idées testées pour de vrai.</p>
     </div>
     <ul>
       <li><span><b>Sites et contenus</b> : blogs, guides et encyclopédies en ligne</span></li>
-      <li><span><b>Bots et automatisation</b> : Discord, IA, outils sur mesure</span></li>
+      <li><span><b>Bots et automatisation</b> : bots Discord et automatisations</span></li>
       <li><span><b>Jeux</b> : expériences narratives et jeux de soirée</span></li>
     </ul>
   </div>
@@ -477,6 +480,13 @@ document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
     $("n-art-title").textContent=a.title;
     $("n-art-date").textContent=a.date||"";
     if(a.img)$("n-art-img").style.backgroundImage='url("'+BLOG+String(a.img).replace(/"/g,"")+'")';
+    $("st-enquetes").textContent=list.length;
+  }).catch(function(){});
+
+  // Nombre de sorts du Grimoire (index de recherche du site)
+  fetch("https://grimoire.endam-digital.com/assets/search.json").then(function(r){if(!r.ok)throw 0;return r.json()}).then(function(idx){
+    var n=idx.filter(function(x){return /^Sort\b/.test(x.k||"")}).length;
+    if(n>0)$("st-sorts").textContent=n;
   }).catch(function(){});
 
   // Prochain sabbat (mêmes dates que le Grimoire)
