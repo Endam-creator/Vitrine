@@ -64,6 +64,23 @@ a{color:inherit;text-decoration:none}
   background-size:44px 44px;
   mask-image:linear-gradient(to bottom,#000 0,transparent 75%);-webkit-mask-image:linear-gradient(to bottom,#000 0,transparent 75%);}
 
+/* bandeau de saison */
+.season{--a:#ff8a3d;position:relative;z-index:11;display:none;
+  background:linear-gradient(90deg,color-mix(in srgb,var(--a) 22%,#0b0e14),#141022 60%,color-mix(in srgb,var(--a) 14%,#0b0e14));
+  border-bottom:1px solid color-mix(in srgb,var(--a) 35%,transparent)}
+.season.on{display:block}
+.season .wrap{display:flex;align-items:center;justify-content:center;gap:14px;min-height:48px;padding-block:8px}
+.season a.go-s{display:flex;align-items:center;gap:10px;font-size:14.5px;color:var(--text);text-align:center}
+.season a.go-s b{color:var(--a);font-weight:600}
+.season a.go-s .arrow{transition:transform .25s}
+.season a.go-s:hover .arrow{transform:translateX(4px)}
+.season .ico{font-size:18px;line-height:1}
+.season button{position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:0;color:var(--muted);
+  font-size:20px;line-height:1;cursor:pointer;padding:6px 8px;border-radius:8px}
+.season button:hover{color:var(--text);background:rgba(255,255,255,.06)}
+.season button:focus-visible{outline:2px solid var(--a);outline-offset:1px}
+@media (max-width:520px){.season .wrap{justify-content:flex-start;padding-right:44px}.season a.go-s{font-size:13.5px;text-align:left}}
+
 /* nav */
 nav{position:sticky;top:0;z-index:10;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
   background:rgba(11,14,20,.7);border-bottom:1px solid rgba(255,255,255,.05)}
@@ -220,6 +237,12 @@ a:focus-visible{outline:2px solid var(--cyan);outline-offset:3px;border-radius:6
 <body>
 <div class="bg"></div>
 
+<div class="season" id="season" role="region" aria-label="À la une">
+  <div class="wrap">
+    <a class="go-s" id="season-link" href="#"><span class="ico" id="season-ico" aria-hidden="true"></span><span id="season-txt"></span><span class="arrow">→</span></a>
+  </div>
+  <button type="button" id="season-close" aria-label="Masquer le bandeau">×</button>
+</div>
 <nav>
   <div class="wrap">
     <a href="#" class="brand">ENDAM <span>DIGITAL</span></a>
@@ -386,6 +409,35 @@ a:focus-visible{outline:2px solid var(--cyan);outline-offset:3px;border-radius:6
 document.getElementById('y').textContent=new Date().getFullYear();
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
 document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+/* ---------- Bandeau de saison ----------
+   Pour ajouter une saison : une ligne de plus dans SAISONS.
+   debut / fin au format "MM-JJ" (inclus). La première saison active l'emporte. */
+(function(){
+  var SAISONS=[
+    {id:"samhain",debut:"10-01",fin:"11-01",ico:"🎃",couleur:"#ff8a3d",
+     txt:"<b>Samhain approche</b> : 8 sorts pour la nuit du 31 octobre",
+     url:"https://grimoire.endam-digital.com/sabbats/samhain/"},
+    {id:"yule",debut:"12-01",fin:"12-23",ico:"🕯️",couleur:"#f2c46b",
+     txt:"<b>Yule, la nuit la plus longue</b> : rituels et recettes du solstice d'hiver",
+     url:"https://grimoire.endam-digital.com/sabbats/yule/"}
+  ];
+  var d=new Date(),md=("0"+(d.getMonth()+1)).slice(-2)+"-"+("0"+d.getDate()).slice(-2);
+  var s=SAISONS.filter(function(x){return md>=x.debut&&md<=x.fin})[0];
+  if(!s)return;
+  var cle="bandeau-ferme-"+s.id+"-"+d.getFullYear();
+  try{if(localStorage.getItem(cle))return}catch(e){}
+  var b=document.getElementById("season");
+  b.style.setProperty("--a",s.couleur);
+  document.getElementById("season-ico").textContent=s.ico;
+  document.getElementById("season-txt").innerHTML=s.txt;
+  var l=document.getElementById("season-link");
+  l.href=s.url;l.setAttribute("data-goatcounter-click","bandeau-"+s.id);
+  b.classList.add("on");
+  document.getElementById("season-close").addEventListener("click",function(){
+    b.classList.remove("on");try{localStorage.setItem(cle,"1")}catch(e){}
+  });
+})();
+
 /* ---------- Quoi de neuf ---------- */
 (function(){
   function $(id){return document.getElementById(id)}
