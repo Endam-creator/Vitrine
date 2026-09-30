@@ -102,9 +102,6 @@ nav ul a:hover{color:var(--text)}
 h1{font-family:"Space Grotesk",sans-serif;font-weight:700;font-size:clamp(32px,5.4vw,58px);line-height:1.08;letter-spacing:-.02em;max-width:820px;margin:0 auto}
 h1 em{font-style:normal;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
 .lead{color:var(--muted);font-size:clamp(16px,2vw,18px);max-width:620px;margin:20px auto 0}
-.stats{display:flex;justify-content:center;gap:40px;margin-top:36px;flex-wrap:wrap}
-.stats div{font-family:"Space Grotesk",sans-serif;font-size:30px;font-weight:700}
-.stats small{display:block;font-family:Inter,sans-serif;font-size:12px;font-weight:500;color:var(--dim);letter-spacing:.1em;text-transform:uppercase}
 
 /* sections */
 section{padding-top:48px;padding-bottom:48px}
@@ -244,9 +241,6 @@ a:focus-visible{outline:2px solid var(--cyan);outline-offset:3px;border-radius:6
   .go .url{display:none}
   nav ul li:nth-child(3){display:none}
   .card,.tease{padding:22px}
-  .stats{gap:14px 20px;flex-wrap:nowrap}
-  .stats div{font-size:26px;flex:1;text-align:center}
-  .stats small{font-size:10px;letter-spacing:.06em}
   .tease .ghost{font-size:140px}
 }
 </style>
@@ -276,11 +270,6 @@ a:focus-visible{outline:2px solid var(--cyan);outline-offset:3px;border-radius:6
   <div class="eyebrow"><i></i> Le labo de projets web</div>
   <h1>Des idées qui deviennent <em>des sites, des bots et des jeux.</em></h1>
   <p class="lead">Endam Digital, c'est mon atelier numérique : des projets web qui me passionnent, du pronostic foot au grimoire de minuit.</p>
-  <div class="stats">
-    <div><span id="st-sorts">57</span><small>sorts au grimoire</small></div>
-    <div><span id="st-enquetes">13</span><small>enquêtes parodiques</small></div>
-    <div>2<small>compétitions suivies</small></div>
-  </div>
 </header>
 
 <main>
@@ -480,14 +469,8 @@ document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
     $("n-art-title").textContent=a.title;
     $("n-art-date").textContent=a.date||"";
     if(a.img)$("n-art-img").style.backgroundImage='url("'+BLOG+String(a.img).replace(/"/g,"")+'")';
-    $("st-enquetes").textContent=list.length;
   }).catch(function(){});
 
-  // Nombre de sorts du Grimoire (index de recherche du site)
-  fetch("https://grimoire.endam-digital.com/assets/search.json").then(function(r){if(!r.ok)throw 0;return r.json()}).then(function(idx){
-    var n=idx.filter(function(x){return /^Sort\b/.test(x.k||"")}).length;
-    if(n>0)$("st-sorts").textContent=n;
-  }).catch(function(){});
 
   // Prochain sabbat (mêmes dates que le Grimoire)
   var SAB=[
