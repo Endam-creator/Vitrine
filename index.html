@@ -192,6 +192,11 @@ footer a:hover{color:var(--text)}
 @media (max-width:980px){.news{grid-template-columns:1fr 1fr}.t-art{grid-column:1/-1}}
 @media (max-width:620px){.news{grid-template-columns:1fr}}
 
+/* navigation au clavier */
+a:focus-visible{outline:2px solid var(--cyan);outline-offset:3px;border-radius:6px}
+.card:focus-visible,.tile:focus-visible{outline:2px solid var(--a);outline-offset:4px;border-radius:var(--r);transform:translateY(-4px)}
+.card:focus-visible .arrow,.tile:focus-visible .arrow{transform:translateX(5px)}
+
 /* apparition */
 .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
 .reveal.in{opacity:1;transform:none}
