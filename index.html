@@ -21,14 +21,21 @@
 <meta name="twitter:title" content="Endam Digital — projets web, jeux et expériences">
 <meta name="twitter:description" content="Un labo de projets web : pronos foot, satire, grimoire, et deux jeux en préparation.">
 <meta name="twitter:image" content="https://endam-digital.com/og-image.png">
-<link rel="icon" href="logo-endam.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preload" href="/fonts/space-grotesk-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"Organization","name":"Endam Digital","url":"https://endam-digital.com/","logo":"https://endam-digital.com/logo-endam.png"}
 </script>
 <style>
+@font-face{font-family:"Space Grotesk";src:url(/fonts/space-grotesk-latin-500-normal.woff2) format("woff2");font-weight:500;font-display:swap}
+@font-face{font-family:"Space Grotesk";src:url(/fonts/space-grotesk-latin-600-normal.woff2) format("woff2");font-weight:600;font-display:swap}
+@font-face{font-family:"Space Grotesk";src:url(/fonts/space-grotesk-latin-700-normal.woff2) format("woff2");font-weight:700;font-display:swap}
+@font-face{font-family:"Inter";src:url(/fonts/inter-latin-400-normal.woff2) format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"Inter";src:url(/fonts/inter-latin-500-normal.woff2) format("woff2");font-weight:500;font-display:swap}
+@font-face{font-family:"Inter";src:url(/fonts/inter-latin-600-normal.woff2) format("woff2");font-weight:600;font-display:swap}
 :root{
   --bg:#0b0e14; --bg2:#10141c; --card:#131822; --line:#232a37;
   --text:#e9edf5; --muted:#8e98ab; --dim:#5d6678;
@@ -159,6 +166,32 @@ footer{padding:40px 0 50px;color:var(--dim);font-size:13px;border-top:1px solid 
 footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
 footer a:hover{color:var(--text)}
 
+/* quoi de neuf */
+.news{display:grid;grid-template-columns:1.35fr 1fr 1fr;gap:20px}
+.tile{--a:var(--cyan);position:relative;display:flex;flex-direction:column;padding:24px;border-radius:var(--r);
+  background:var(--card);border:1px solid var(--line);overflow:hidden;transition:transform .25s,border-color .25s}
+.tile:hover{transform:translateY(-3px);border-color:color-mix(in srgb,var(--a) 55%,var(--line))}
+.tile .src{font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--a);margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.tile .src::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--a)}
+.tile h3{font-family:"Space Grotesk",sans-serif;font-size:19px;line-height:1.3;
+  display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.tile .when{font-size:13px;color:var(--dim);margin-top:8px}
+.tile .txt{font-size:14px;color:var(--muted);margin-top:14px;line-height:1.55}
+.tile .more{margin-top:auto;padding-top:16px;font-size:14px;font-weight:600}
+.tile:hover .arrow{transform:translateX(5px)}
+.t-art{--a:#ff4d5e;padding:0}
+.t-art .thumb{aspect-ratio:16/7;background:#1a1f2b center/cover no-repeat;border-bottom:1px solid var(--line)}
+.t-art .body{padding:20px 24px 24px;display:flex;flex-direction:column;flex:1}
+.t-sab,.t-moon{--a:#b48cff}
+.big{font-family:"Space Grotesk",sans-serif;font-size:34px;font-weight:700;line-height:1.1}
+.count{display:inline-block;margin-top:10px;font-size:13px;font-weight:600;color:var(--a);
+  background:color-mix(in srgb,var(--a) 12%,transparent);border:1px solid color-mix(in srgb,var(--a) 30%,transparent);border-radius:99px;padding:3px 11px}
+.moonrow{display:flex;align-items:center;gap:16px}
+.moonrow svg{width:64px;height:64px;flex:none;filter:drop-shadow(0 0 16px rgba(244,236,216,.18))}
+.moonrow .big{font-size:22px}
+@media (max-width:980px){.news{grid-template-columns:1fr 1fr}.t-art{grid-column:1/-1}}
+@media (max-width:620px){.news{grid-template-columns:1fr}}
+
 /* apparition */
 .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
 .reveal.in{opacity:1;transform:none}
@@ -252,6 +285,47 @@ footer a:hover{color:var(--text)}
   </div>
 </section>
 
+<section id="nouveautes" class="wrap">
+  <div class="head">
+    <div><span class="tag">En direct des projets</span><h2>Quoi de neuf</h2></div>
+    <p>Mis à jour automatiquement.</p>
+  </div>
+
+  <div class="news">
+    <a class="tile t-art reveal" id="n-art" data-goatcounter-click="neuf-article" href="https://les-verites-cachees.endam-digital.com/">
+      <div class="thumb" id="n-art-img"></div>
+      <div class="body">
+        <span class="src">Vérités Cachées · Dernier article</span>
+        <h3 id="n-art-title">Les dernières révélations qu'ils ne veulent pas que tu lises</h3>
+        <div class="when" id="n-art-date">Nouvel article régulièrement</div>
+        <div class="more">Lire l'article <span class="arrow">→</span></div>
+      </div>
+    </a>
+
+    <a class="tile t-sab reveal" id="n-sab" data-goatcounter-click="neuf-sabbat" href="https://grimoire.endam-digital.com/sabbats/">
+      <span class="src">Grimoire · Prochain sabbat</span>
+      <div class="big" id="n-sab-name">La roue de l'année</div>
+      <div class="when" id="n-sab-date">Huit fêtes, du solstice à Samhain</div>
+      <div><span class="count" id="n-sab-count">Voir le calendrier</span></div>
+      <p class="txt" id="n-sab-txt">Les huit fêtes de la roue de l'année, leurs rituels, leurs recettes et leur histoire.</p>
+      <div class="more">Préparer la fête <span class="arrow">→</span></div>
+    </a>
+
+    <a class="tile t-moon reveal" id="n-moon" data-goatcounter-click="neuf-lune" href="https://grimoire.endam-digital.com/">
+      <span class="src">Grimoire · La lune ce soir</span>
+      <div class="moonrow">
+        <svg id="n-moon-svg" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="50" fill="#221d2e" stroke="#3a3249"/></svg>
+        <div>
+          <div class="big" id="n-moon-name">Lune du jour</div>
+          <div class="when" id="n-moon-meta">Phase et conseils du soir</div>
+        </div>
+      </div>
+      <p class="txt" id="n-moon-txt">Chaque soir, la phase de la lune et les sorts qui vont avec.</p>
+      <div class="more">Ce soir dans le grimoire <span class="arrow">→</span></div>
+    </a>
+  </div>
+</section>
+
 <section id="bientot" class="wrap">
   <div class="head">
     <div><span class="tag">En préparation</span><h2>Bientôt dans le labo</h2></div>
@@ -299,7 +373,7 @@ footer a:hover{color:var(--text)}
 <footer>
   <div class="wrap">
     <span>© <span id="y">2026</span> Endam Digital</span>
-    <span><a href="#projets">Projets</a> · <a href="#bientot">Bientôt</a> · <a href="#apropos">À propos</a></span>
+    <span><a href="#projets">Projets</a> · <a href="#nouveautes">Quoi de neuf</a> · <a href="#bientot">Bientôt</a> · <a href="/mentions-legales/">Mentions légales</a></span>
   </div>
 </footer>
 
@@ -307,6 +381,69 @@ footer a:hover{color:var(--text)}
 document.getElementById('y').textContent=new Date().getFullYear();
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
 document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+/* ---------- Quoi de neuf ---------- */
+(function(){
+  function $(id){return document.getElementById(id)}
+
+  // Dernier article du blog (articles.json, servi par GitHub Pages)
+  var BLOG="https://les-verites-cachees.endam-digital.com/";
+  fetch(BLOG+"articles.json",{cache:"no-cache"}).then(function(r){if(!r.ok)throw 0;return r.json()}).then(function(list){
+    if(!Array.isArray(list)||!list.length)return;
+    var a=list.slice().sort(function(x,y){return String(y.published||"").localeCompare(String(x.published||""))})[0];
+    if(!a||!a.id||!a.title)return;
+    $("n-art").href=BLOG+"articles/"+encodeURIComponent(a.id)+".html";
+    $("n-art-title").textContent=a.title;
+    $("n-art-date").textContent=a.date||"";
+    if(a.img)$("n-art-img").style.backgroundImage='url("'+BLOG+String(a.img).replace(/"/g,"")+'")';
+  }).catch(function(){});
+
+  // Prochain sabbat (mêmes dates que le Grimoire)
+  var SAB=[
+    ["samhain","Samhain",9,31,"31 octobre – 1ᵉʳ novembre","La nuit où le voile entre les vivants et les morts devient le plus fin."],
+    ["yule","Yule",11,21,"Solstice d’hiver · 20–23 décembre","La nuit la plus longue : le soleil renaît et les jours rallongent."],
+    ["imbolc","Imbolc",1,1,"1ᵉʳ – 2 février","Les premiers signes du printemps et la fête de Brigid."],
+    ["ostara","Ostara",2,20,"Équinoxe de printemps · 19–21 mars","Le jour égale la nuit, puis la lumière l’emporte."],
+    ["beltane","Beltane",4,1,"30 avril – 1ᵉʳ mai","« Le feu brillant » : grands feux et protection des troupeaux."],
+    ["litha","Litha",5,21,"Solstice d’été · 20–22 juin","Le jour le plus long, sommet de la puissance du soleil."],
+    ["lughnasadh","Lughnasadh",7,1,"1ᵉʳ août","La première moisson, en l’honneur du dieu Lug."],
+    ["mabon","Mabon",8,22,"Équinoxe d’automne · 21–23 septembre","La seconde moisson : désormais, l’obscurité l’emporte."]];
+  var now=new Date(),today=new Date(now.getFullYear(),now.getMonth(),now.getDate()),best=null,bestDays=1e9;
+  SAB.forEach(function(sb){
+    var d=new Date(today.getFullYear(),sb[2],sb[3]);if(d<today)d=new Date(today.getFullYear()+1,sb[2],sb[3]);
+    var days=Math.round((d-today)/864e5);if(days<bestDays){bestDays=days;best=sb}
+  });
+  if(best){
+    $("n-sab").href="https://grimoire.endam-digital.com/sabbats/"+best[0]+"/";
+    $("n-sab-name").textContent=best[1];
+    $("n-sab-date").textContent=best[4];
+    $("n-sab-txt").textContent=best[5];
+    $("n-sab-count").textContent=bestDays===0?"C'est aujourd'hui !":bestDays===1?"C'est demain":"Dans "+bestDays+" jours";
+  }
+
+  // Lune du soir (même calcul que le Grimoire)
+  var SYN=29.530588853,REF=Date.UTC(2000,0,6,18,14)/864e5;
+  var age=((now.getTime()/864e5-REF)%SYN+SYN)%SYN,p=age/SYN,lit=(1-Math.cos(2*Math.PI*p))/2;
+  var PH=[["Nouvelle lune",1.85,"Temps du repos et des graines : écris tes intentions pour le cycle qui commence."],
+          ["Premier croissant",7.38,"L’énergie monte : moment idéal pour la chance et les nouveaux projets."],
+          ["Premier quartier",9.23,"Temps de l’effort et des décisions : courage et persévérance."],
+          ["Gibbeuse croissante",12.92,"On peaufine et on nourrit ce qui a été commencé."],
+          ["Pleine lune",16.62,"Le sommet du cycle : gratitude, divination, pierres à recharger."],
+          ["Gibbeuse décroissante",20.3,"Temps du partage et de la reconnaissance. On commence à trier."],
+          ["Dernier quartier",24,"On tranche et on lâche prise : sorts de coupure et de bannissement."],
+          ["Dernier croissant",27.68,"Nettoyage, purification de la maison, repos avant le renouveau."],
+          ["Nouvelle lune",99,"Temps du repos et des graines : écris tes intentions pour le cycle qui commence."]];
+  var ph=PH.filter(function(x){return age<x[1]})[0],name=ph[0];
+  $("n-moon-txt").textContent=ph[2];
+  function path(p,r,c){var k=Math.cos(2*Math.PI*p),rx=Math.abs(k)*r,top=c+","+(c-r),bot=c+","+(c+r);
+    if(p<.5)return"M"+top+" A"+r+","+r+" 0 0 1 "+bot+" A"+rx+","+r+" 0 0 "+(k>0?0:1)+" "+top+"Z";
+    return"M"+top+" A"+r+","+r+" 0 0 0 "+bot+" A"+rx+","+r+" 0 0 "+(k>0?1:0)+" "+top+"Z"}
+  var svg='<defs><radialGradient id="mg" cx="40%" cy="38%" r="70%"><stop offset="0" stop-color="#f4ecd8"/><stop offset="1" stop-color="#cdbf9f"/></radialGradient></defs><circle cx="50" cy="50" r="50" fill="#221d2e" stroke="#3a3249"/>';
+  if(lit>.995)svg+='<circle cx="50" cy="50" r="50" fill="url(#mg)"/>';else if(lit>.005)svg+='<path d="'+path(p,50,50)+'" fill="url(#mg)"/>';
+  $("n-moon-svg").innerHTML=svg;
+  $("n-moon-name").textContent=name;
+  var toFull=Math.round(((SYN/2-age)+SYN)%SYN);
+  $("n-moon-meta").textContent=Math.round(lit*100)+" % éclairée"+(name==="Pleine lune"?"":" · pleine lune dans "+toFull+" j");
+})();
 </script>
 <script data-goatcounter="https://endam-digital.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 </body>
