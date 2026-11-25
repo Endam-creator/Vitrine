@@ -282,6 +282,9 @@ nav ul a.nav-sup svg{width:14px;height:14px}
 .notify-mini:hover{background:color-mix(in srgb,var(--a) 24%,transparent)}
 .notify-mini svg{width:15px;height:15px}
 
+.alt-sup{margin-top:14px;font-size:14px;color:var(--muted)}
+.alt-sup a{color:var(--text);border-bottom:1px solid color-mix(in srgb,#b48cff 55%,transparent)}
+.alt-sup a:hover{border-bottom-color:#b48cff}
 /* collecte */
 .progress{margin-top:18px}
 .progress .bar{height:10px;border-radius:99px;background:rgba(255,255,255,.06);border:1px solid var(--line);overflow:hidden}
@@ -372,14 +375,15 @@ a:focus-visible{outline:2px solid var(--cyan);outline-offset:3px;border-radius:6
       <div class="go"><b>Ouvrir les dossiers <span class="arrow">→</span></b><span class="url">les-verites-cachees…</span></div>
     </a>
 
-    <a class="card c-grimoire reveal" data-goatcounter-click="clic-grimoire" href="https://grimoire.endam-digital.com">
+    <div class="card c-grimoire reveal">
       <div class="top"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19.5 14.2A7.8 7.8 0 1 1 9.8 4.5a6.2 6.2 0 0 0 9.7 9.7z"/><path d="M17 3.5v3M15.5 5h3"/><circle cx="19.5" cy="9" r=".5" fill="currentColor"/></svg></div><span class="status">En ligne</span></div>
       <h3>Le Grimoire de Minuit</h3>
       <div class="kind">Encyclopédie · Culture</div>
-      <p>Un Livre des Ombres à feuilleter : des dizaines de sorts et de rituels, les 8 sabbats, la lune du jour, le tarot et quatre mille ans d'histoire des sorcières.</p>
+      <p>Un Livre des Ombres à feuilleter : des dizaines de sorts et de rituels, les 8 sabbats, la lune du jour, le tarot et quatre mille ans d'histoire des sorcières. Il existe aussi en vrais livres illustrés.</p>
       <div class="chips"><span>Sorts et rituels</span><span>Lune du jour</span><span>Générateur de sigils</span><span>Lettre du samedi</span></div>
-      <div class="go"><b>Ouvrir le grimoire <span class="arrow">→</span></b><span class="url">grimoire.endam-digital.com</span></div>
-    </a>
+      <a class="notify-mini" href="https://grimoire.endam-digital.com/livres/" data-goatcounter-click="livres-grimoire"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5V5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2.5z"/><path d="M6 21h13v-4"/><path d="M9 7h6"/></svg>Les livres sur Amazon</a>
+      <a class="go stretch" href="https://grimoire.endam-digital.com" data-goatcounter-click="clic-grimoire"><b>Ouvrir le grimoire <span class="arrow">→</span></b><span class="url">grimoire.endam-digital.com</span></a>
+    </div>
 
   </div>
   <p class="aside-link reveal">Aussi sur Endam Digital : <a href="https://honeygain.endam-digital.com" rel="sponsored" data-goatcounter-click="clic-honeygain">un avis honnête sur Honeygain, l'appli qui rémunère ta bande passante <span class="arrow">→</span></a> <span class="dim">(lien de parrainage)</span></p>
@@ -479,6 +483,7 @@ a:focus-visible{outline:2px solid var(--cyan);outline-offset:3px;border-radius:6
         <a class="link-sup" href="/soutenir/" data-goatcounter-click="lien-soutenir-accueil">Voir où va l'argent <span class="arrow">→</span></a>
       </div>
       <small>Paiement sécurisé par Ko-fi · sans inscription · sans abonnement obligatoire</small>
+      <p class="alt-sup">Tu préfères recevoir quelque chose en échange ? <a href="https://grimoire.endam-digital.com/livres/" data-goatcounter-click="livres-soutenir">Les livres du Grimoire de Minuit</a>, sur Amazon, soutiennent aussi le labo.</p>
     </div>
     <div class="goal-card">
       <span class="k">Objectif en cours</span>
