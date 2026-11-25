@@ -45,6 +45,11 @@ h1 em{font-style:normal;background:var(--grad);-webkit-background-clip:text;back
 .lead{color:var(--muted);font-size:clamp(16px,2vw,18px);margin-top:16px;max-width:640px}
 h2{font-family:"Space Grotesk",sans-serif;font-size:22px;margin:48px 0 16px}
 
+.progress{margin-top:18px;max-width:520px}
+.progress .bar{height:10px;border-radius:99px;background:rgba(255,255,255,.06);border:1px solid var(--line);overflow:hidden}
+.progress .fill{height:100%;width:0;border-radius:99px;background:var(--grad);transition:width 1s ease}
+.progress .lbl{display:flex;justify-content:space-between;gap:10px;margin-top:8px;font-size:13px;color:var(--muted)}
+.progress .lbl b{color:var(--text)}
 /* objectif */
 .goal{margin-top:36px;padding:28px;border-radius:var(--r);border:1px solid color-mix(in srgb,var(--cyan) 35%,var(--line));
   background:linear-gradient(135deg,rgba(63,216,245,.08),rgba(154,92,255,.08) 70%),var(--card)}
@@ -107,6 +112,10 @@ footer a:hover{color:var(--text)}
     <span class="k">Objectif en cours</span>
     <h3 id="goal-title">Qui est le vrai ? sur Android</h3>
     <p>Le compte développeur Google Play coûte 25 $, une seule fois. C'est la porte d'entrée pour publier le jeu de soirée sur le Play Store, puis les projets suivants.</p>
+    <div class="progress" data-recu="0" data-objectif="25" data-devise="$">
+      <div class="bar" role="progressbar" aria-valuemin="0" aria-valuemax="25" aria-valuenow="0" aria-label="Collecte en cours"><div class="fill"></div></div>
+      <div class="lbl"><span><b class="recu">0 $</b> sur 25 $</span><span class="msg">Le premier café lance la barre ☕</span></div>
+    </div>
     <div class="cta">
       <a class="btn" id="kofi" href="https://ko-fi.com/endam_digital" target="_blank" rel="noopener" data-goatcounter-click="don-kofi">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 8h1a4 4 0 0 1 0 8h-1"/><path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V8z"/><path d="M7 2c0 1 1 1.5 1 2.5S7 6 7 6M11 2c0 1 1 1.5 1 2.5S11 6 11 6"/></svg>
@@ -166,5 +175,17 @@ footer a:hover{color:var(--text)}
 </footer>
 <script>document.getElementById('y').textContent=new Date().getFullYear();</script>
 <script data-goatcounter="https://endam-digital.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+<script>
+/* Collecte : changer data-recu ci-dessus (et sur la page d'accueil) à chaque don. */
+document.querySelectorAll(".progress[data-recu]").forEach(function(p){
+  var r=parseFloat(p.dataset.recu)||0,o=parseFloat(p.dataset.objectif)||1,d=p.dataset.devise||"€";
+  var pct=Math.min(100,Math.round(r/o*100));
+  p.querySelector(".recu").textContent=(r%1?r.toFixed(2):r)+" "+d;
+  p.querySelector(".bar").setAttribute("aria-valuenow",r);
+  var m=p.querySelector(".msg");
+  m.textContent=r<=0?"Le premier café lance la barre ☕":pct>=100?"Objectif atteint, merci !":pct+" %";
+  requestAnimationFrame(function(){p.querySelector(".fill").style.width=pct+"%"});
+});
+</script>
 </body>
 </html>
